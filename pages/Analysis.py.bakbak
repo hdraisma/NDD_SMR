@@ -110,12 +110,8 @@ if 'z_df' not in st.session_state:
 if 'z_name' not in st.session_state:
   st.session_state['z_name'] = ''
 
-if isinstance(st.session_state['main_data'], pd.core.frame.DataFrame):
+if isinstance(st.session_state['main_data'],pd.core.frame.DataFrame):
   main_df = st.session_state['main_data']
-  # 
-  st.write("main_df = st.session_state['main_data']")   #<-- This line new and temporary(?) code as at 2023-11-21 13:58GMT (HD) -- and indeed this condition is met apparently as at 2023-11-21 13:59GMT (HD).
-  # 
-  st.write(main_df)   #<-- This line new and temporary(?) code as at 2023-11-21 14:11GMT (HD) -- will want to have a look at this 'pandas type data frame' first, because perhaps it's empty actually? <-- and as at 2023-11-21 14:15GMT (HD) it shows as "empty"(!) indeed!
 else:
   main_df = load_data(st.secrets['simple_sig'])
 
@@ -123,24 +119,11 @@ st.title('Data Analysis')
 
 st.write("Here you can select from a variety of analysis methods used in our paper")
 
-### START 'New' code, copy--pasted to here as at 2023-11-21 14:04GMT (HD).
-# 
-# diseases
-unique_dx = list(main_df['Disease'].unique())
-unique_dx.append('All')
-#
-### END 'New' code, copy--pasted to here as at 2023-11-21 14:04GMT (HD).
-
 with st.form("Filter_Results"):
   st.write("Filter results by disease(s) and omic(s)")
-
-  ### START Code copied as at 2023-11-21 14:03GMT (HD).
-  # 
   # diseases
   unique_dx = list(main_df['Disease'].unique())
   unique_dx.append('All')
-  #
-  ### END Code copied as at 2023-11-21 14:03GMT (HD).
   
   diseases = st.multiselect('Please select disease(s)', unique_dx)
   
@@ -210,6 +193,7 @@ with st.container():
       mtc_run = st.form_submit_button("Run correction!")
       
       if mtc_run: # if run selection is pressed, run adjustment on filtered df
+        
         try:
           mtc_result = fdr(st.session_state['filterdf'])
           st.session_state['mtc_df'] = mtc_result
@@ -226,29 +210,29 @@ with st.container():
       if st.session_state['mtc_name']:
         st.download_button(label="Download data as CSV", data=convert_df(st.session_state['mtc_df']),file_name=st.session_state['mtc_name'], mime='text/csv')
         
-  with col2:
-    with st.form('zscore'):
-      st.subheader("Z-score")
-      st.write('Compute z-score on your filtered dataframe and add a "z-score" column to your dataframe')
-      
-      z_run = st.form_submit_button("Compute z-scores!")
-      
-      if z_run:
-        try:
-          z_df = zscore(st.session_state['filterdf'])
-          st.session_state['z_df'] = z_df
-          st.session_state['z_status'] = 'run'
-        except TypeError:
-          st.error('Make sure to use the options above to filter your results and then run the computation')
-          st.session_state['z_status'] == 'not_run'
+      with col2:
+        with st.form('zscore'):
+          st.subheader("Z-score")
+          st.write('Compute z-score on your filtered dataframe and add a "z-score" column to your dataframe')
           
-    if st.session_state['z_status'] == 'run':
-      st.dataframe(st.session_state['z_df'])
-      z_filename = st.text_input('Please provide an output file name for the results of the z-score computation', placeholder = 'example.csv')
-      st.session_state['z_name'] = z_filename
-      
-      if st.session_state['z_name']:
-        st.download_button(label="Download data as CSV", data=convert_df(st.session_state['z_df']),file_name=st.session_state['z_name'], mime='text/csv')
+          z_run = st.form_submit_button("Compute z-scores!")
+          
+          if z_run:
+            try:
+              z_df = zscore(st.session_state['filterdf'])
+              st.session_state['z_df'] = z_df
+              st.session_state['z_status'] = 'run'
+            except TypeError:
+              st.error('Make sure to use the options above to filter your results and then run the computation')
+              st.session_state['z_status'] == 'not_run'
+              
+        if st.session_state['z_status'] == 'run':
+          st.dataframe(st.session_state['z_df'])
+          z_filename = st.text_input('Please provide an output file name for the results of the z-score computation', placeholder = 'example.csv')
+          st.session_state['z_name'] = z_filename
+          
+          if st.session_state['z_name']:
+            st.download_button(label="Download data as CSV", data=convert_df(st.session_state['z_df']),file_name=st.session_state['z_name'], mime='text/csv')
 
 
 # END OF FILE.

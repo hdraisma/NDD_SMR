@@ -12,7 +12,6 @@ from gspread_pandas import Spread, Client
 # from google.oauth2.service_account import Credentials   #<-- Commented this line as at 2023-11-07 17:22GMT (HD); also, this line apparently equal to that as in "https://discuss.streamlit.io/t/solved-issue-of-pulling-private-google-sheet-into-a-streamlit-app-using-gspread-instead-of-gsheetsdb/39056".
 # 
 from PIL import Image
-from st_files_connection import FilesConnection   # REF "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7" line 10 as at 2023-11-21 15:49GMT (HD).
 
 
 if 'client_auth' not in st.session_state: # create session state variable for client auth 
@@ -31,28 +30,10 @@ if 'main_data' not in st.session_state: # create session state
 ### and hence apparently for the purpose of "pull[ing] data from a private
 ### google worksheet [] into a streamlit app".
 # 
-### Also, START Code uncommented as at 2023-11-22 10:18GMT (HD), as this code is
-### still present i.e. not deleted or commented-out in
-### "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7"
-### "Home.py" lines 19--36. ~<-- recommented this code as at 2023-11-22 10:33GMT (HD)
-# 
 # 
 # scopes = ["https://www.googleapis.com/auth/spreadsheets",]
 # 
-# skey = st.secrets["gcp_service_account"]   #<-- However as at 2023-11-22 10:25GMT (HD) this leads to the following error message to be displayed in "http://localhost:8501/":
-#   # ====
-#   # No secrets files found. Valid paths for a secrets.toml file are: /home/hammie/.streamlit/secrets.toml, /media/hammie/My Passport/SOFTWARE/omicsynthcustomanalysis/NDD_SMR/.streamlit/secrets.toml
-#   # --
-#   # FileNotFoundError: No secrets files found. Valid paths for a secrets.toml file are: /home/hammie/.streamlit/secrets.toml, /media/hammie/My Passport/SOFTWARE/omicsynthcustomanalysis/NDD_SMR/.streamlit/secrets.toml
-#   # 
-#   # Traceback:
-#   # --
-#   # [... -- HD]
-#   # File "/media/hammie/My Passport/SOFTWARE/omicsynthcustomanalysis/NDD_SMR/Home.py", line 42, in <module>
-#   #     skey = st.secrets["gcp_service_account"]
-#   # [... -- HD]  
-#   # --
-#   # ====
+# skey = st.secrets["gcp_service_account"]
 # credentials = Credentials.from_service_account_info(
 #     skey,
 #     scopes=scopes,
@@ -73,46 +54,14 @@ if 'main_data' not in st.session_state: # create session state
 #     return df
 # 
 # 
-### END Code uncommented as at 2023-11-22 10:18GMT (HD), and recommented as at 2023-11-22 10:33GMT (HD).
-# 
-### START Code uncommented as at 2023-11-21 15:54GMT (HD).
-# 
-# 
-# 
 # # Load in unfiltered associations   #<-- Commented this create_main() function
-# # definition below (HD as at 2023-11-07 18:01GMT) as direct consequence of code
-# # equal to that as in mentioned "discuss.streamlit.io" post.
-# # 
-# @st.cache_data(show_spinner = False)   #<-- This line copy--pasted from "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7" line 39 as at 2023-11-22 10:06GMT (HD).
+# definition below (HD as at 2023-11-07 18:01GMT) as direct consequence of code
+# equal to that as in mentioned "discuss.streamlit.io" post.
+# 
 # def create_main():
-#   # df = load_data(st.secrets['simple_sig'])   #<-- Commented this line as at 2023-11-21 16:00GMT (HD), as per "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7".
-#   
-#   ### START Code copy--pasted from lines 41--54 of "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7" as at 2023-11-21 16:11GMT (HD).
-#   # 
-#   # 
-#   # establish connection
-#   conn = st.experimental_connection('gcs', type=FilesConnection)
-#   
-#   # read in file
-#   df = conn.read("omicsynth/NDD_SMR_genes_all.parquet", input_format="parquet")
-#   
-#   
-#   return df
-# @st.cache_data(show_spinner = False)
-# def create_mainsig():
-#   # establish connection
-#   conn = st.experimental_connection('gcs', type=FilesConnection)
+#     df = load_data(st.secrets['simple_sig'])
 # 
-#   df = conn.read("omicsynth/NDD_sig_allcol.csv", input_format="csv")
-#   # 
-#   # 
-#   ### END Code copy--pasted from lines 41--54 of "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7" as at 2023-11-21 16:11GMT (HD)
-#   
-#   return df
-# 
-# 
-# 
-### END Code uncommented as at 2023-11-21 15:54GMT (HD).
+#     return df
 # 
 # 
 ### END Code commented as at 2023-11-07 17:36GMT (HD).
@@ -131,18 +80,16 @@ st.markdown("""Welcome to OmicSynth's Neurodegenerative Disorders functional ana
 ### "https://discuss.streamlit.io/t/solved-issue-of-pulling-private-google-sheet-into-a-streamlit-app-using-gspread-instead-of-gsheetsdb/39056"
 ### i.e. the create_main() function definition, and hence apparently for the
 ### purpose of "pull[ing] data from a private google worksheet [] into a
-### streamlit app"., and uncommented again as at 2023-11-21 16:17GMT (HD) as it might become functional in our case of deployment on the Brutus / SHC Workbench Connect again due to "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7".
+### streamlit app".
 # 
 # 
 # with st.spinner('Loading in data ... only happens once :)'):
-#   main_df = create_main()
-#   mainsig_df = create_mainsig()   #<-- This line copy--pasted from "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7" line 67 as at 2023-11-21 16:21GMT (HD).
-#   st.session_state['main_data'] = main_df
-#   st.session_state['mainsig_data'] = mainsig_df   #<-- This line copy--pasted from "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7" line 69 as at 2023-11-21 16:22GMT (HD).
-#   st.success('Done!')
+#     main_df = create_main()
+#     st.session_state['main_data'] = main_df
+#     st.success('Done!')
 # 
 # 
-### END Code commented as at 2023-11-07 18:27GMT (HD)., and uncommented again as at 2023-11-21 16:17GMT (HD).
+### END Code commented as at 2023-11-07 18:27GMT (HD).
 
 
 ### START Code commented as at 2023-11-07 18:35GMT (HD).

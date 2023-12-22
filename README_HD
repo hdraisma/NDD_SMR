@@ -1,0 +1,50 @@
+As at 2023-11-16 10:30GMT (HD):
+--
+"./Scriptum.R" is from "Z:\SOFTWARE\omicsynthcustomanalysis\NDD_SMR" as on ELITEBOOK, as per Hmail:
+====
+From: Hermanus Draisma <Hermanus.Draisma@SoseiHeptares.com>
+Sent: 16 November 2023 10:27
+To: Hermanus Draisma <Hermanus.Draisma@SoseiHeptares.com>
+Subject: "Z:\SOFTWARE\omicsynthcustomanalysis\NDD_SMR\Scriptum.R" as on ELITEBOOK
+====
+
+
+As at 2023-11-17 18:20GMT (HD):
+--
+re "./Home_py.zip":
+====
+From: Hermanus Draisma <Hermanus.Draisma@SoseiHeptares.com>
+Sent: 17 November 2023 18:16
+To: Hermanus Draisma <Hermanus.Draisma@SoseiHeptares.com>
+Subject: RE: \SOFTWARE\omicsynthcustomanalysis\NDD_SMR\Home.py" as on ELITEBOOK
+ 
+Created attached Home_py.zip by compressing "Z:\SOFTWARE\omicsynthcustomanalysis\NDD_SMR\Home.py" as on ELITEBOOK.
+
+ 
+
+H2H
+====
+
+
+As at 2023-11-20 18:50GMT (HD):
+--
+Implemented "https://github.com/NIH-CARD/NDD_SMR/pull/2/commits/3886c119d1e7343ca6de04778dca6dbd17a24e75" in "requirements.txt"; retained old version (i.e., version of "requirements.txt" as obtained through "$ git clone") as "requirements.txt.bak".
+
+
+As at 2023-11-21 15:38GMT (HD):
+--
+Copy--pasted "./Home.py" as "./Home.py.bak" here, to retain version of "Home.py" before implementing the changes as in "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7".
+
+
+As at 2023-11-21 16:28GMT (HD):
+--
+Copy--pasted "./requirements.txt" as "./requirements.txt.bakbak" here, to retain version of "requirements.txt" before implementing the changes as in "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/1b11103888403c3932329d3564347422a74e30c7".
+
+
+As at 2023-11-21 16:53GMT (HD):
+--
+Copy--pasted "./requirements.txt" as "./requirements.txt.bakbakbak" here, to retain version of "requirements.txt" before implementing the changes as in "https://github.com/NIH-CARD/NDD_SMR/pull/1/commits/249f9af76938f98046ae4b43ebf47655123fd491" i.e. inclusion of "st-files-connection" in list of packages to be installed.
+
+
+#END OF FILE.
+
